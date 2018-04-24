@@ -1,0 +1,1777 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{\#2. Clustering}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Clustering}\label{clustering}
+
+FIRA 빅데이터 플랫폼 과정 - 2017.08.14.월 14:00-18:00
+
+    \subsubsection{1. Data}\label{data}
+
+\begin{itemize}
+\tightlist
+\item
+  1-1. \texttt{BathSoap.xlsx}
+\item
+  1-2. Data Load : \texttt{pd.read\_xlsx}
+\item
+  1-3. Join Table : \texttt{pd.merge}
+\item
+  1-4. Delete Rows \& Columns
+\end{itemize}
+
+\subsubsection{2. Hierarchical
+Clustering}\label{hierarchical-clustering}
+
+\begin{itemize}
+\tightlist
+\item
+  2-1. \texttt{sklearn.cluster.AgglomerativeClustering}
+\item
+  2-2. Clustering with Dendrogram : \texttt{scipy.cluster.hierarchy}
+\end{itemize}
+
+\subsubsection{3. K-means}\label{k-means}
+
+\begin{itemize}
+\tightlist
+\item
+  3-1. \texttt{sklearn.cluster.KMeans}
+\end{itemize}
+
+\subsubsection{4. Analysis}\label{analysis}
+
+\begin{itemize}
+\tightlist
+\item
+  4-1. Choose K : Using Silhouette Plot
+\item
+  4-2. .groupby()
+\end{itemize}
+
+\subsubsection{5. 실습 : 비누 판매 마케팅 전략 수립을 위한 데이터
+분석}\label{uxc2e4uxc2b5-uxbe44uxb204-uxd310uxb9e4-uxb9c8uxcf00uxd305-uxc804uxb7b5-uxc218uxb9bduxc744-uxc704uxd55c-uxb370uxc774uxd130-uxbd84uxc11d}
+
+\begin{itemize}
+\tightlist
+\item
+  5-1. More Preprocessing
+\item
+  5-2. 비누 구매 고객 세분화
+\item
+  5-3. 타겟 클러스터 선정 및 마케팅 기획
+\end{itemize}
+
+    \subsection{\#\#\# 1. Data}\label{data}
+
+\begin{itemize}
+\tightlist
+\item
+  1-1. \texttt{BathSoap.xlsx}
+\item
+  1-2. Data Load : \texttt{pd.read\_xlsx}
+\item
+  1-3. Join Table : \texttt{pd.merge}
+\item
+  1-4. Delete Rows \& Columns
+\end{itemize}
+
+    \subsection{\texorpdfstring{\#\#\#\# 1-1.
+\texttt{BathSoap.xlsx}}{\#\#\#\# 1-1. BathSoap.xlsx}}\label{bathsoap.xlsx}
+
+\begin{itemize}
+\item
+  sheet3 : DM\_Sheet, 멤버 정보 및 비누 구입 정보
+\item ~
+  \subsection{sheet4 : Durables, 멤버들의 비누 이외 타물품 소유
+  정보}\label{sheet4-durables-uxba64uxbc84uxb4e4uxc758-uxbe44uxb204-uxc774uxc678-uxd0c0uxbb3cuxd488-uxc18cuxc720-uxc815uxbcf4}
+
+  비누를 구매한 고객들의 데이터를 토대로 군집화를 이용하여 효과적인
+  마케팅 전략을 수립하려고 한다. 총 600개의 표본을 각종 변수를 고려하여
+  치밀하게 표집하였다. 주어진 데이터는 각종 인구통계자료, 내구재 소유
+  자료, 제품의 카테고리와 각 브랜드에 대한 구매 데이터이다.
+\end{itemize}
+
+    \emph{Q. 군집화는 마케팅 전략을 세우는데 어떤 역할을 할 수 있는가?}
+
+    \subsection{\texorpdfstring{\#\#\#\# 1-2. Data Load :
+\texttt{pd.read\_excel}}{\#\#\#\# 1-2. Data Load : pd.read\_excel}}\label{data-load-pd.read_excel}
+
+\texttt{BathSoap.xlsx} 파일에서 데이터가 있는 sheet를 DataFrame으로 변환
+* pd.read\_excel document 참고 * sheet 위치, header로 쓸 row를 잘 지정할
+것 * row의 시작은 0
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} df}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BathSoap.xlsx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} durable\PYZus{}df}
+         \PY{n}{durable\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BathSoap.xlsx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{\texorpdfstring{\#\#\#\# 1-3. Join Table :
+\texttt{pd.merge}}{\#\#\#\# 1-3. Join Table : pd.merge}}\label{join-table-pd.merge}
+
+DM\_Sheet와 Durables의 DataFrame을 통합 * 'Member id', 'MEM'을 기준으로
+통합, Inner Join
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} merged\PYZus{}df \PYZam{} set\PYZus{}index}
+         \PY{n}{merged\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{durable\PYZus{}df}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Member id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MEM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Member id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{\#\#\#\# 1-4. Delete Rows \&
+Columns}\label{delete-rows-columns}
+
+\begin{itemize}
+\tightlist
+\item
+  Delete Rows : 결측치가 있는 행은 지울 것
+\item
+  Delete Columns : 겹치거나 문제가 있는 열을 지울 것
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Delete Rows : no\PYZus{}nan\PYZus{}df }
+         \PY{n}{no\PYZus{}nan\PYZus{}df} \PY{o}{=} \PY{n}{merged\PYZus{}df}\PY{p}{[}\PY{n}{merged\PYZus{}df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} Delete columns : X\PYZus{}df}
+         \PY{n}{X\PYZus{}df} \PY{o}{=} \PY{n}{no\PYZus{}nan\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MEM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{\#\#\# 2. Hierarchical
+Clustering}\label{hierarchical-clustering}
+
+\subsection{\texorpdfstring{\#\#\#\# 2-1.
+\texttt{sklearn.cluster.AgglomerativeClustering}}{\#\#\#\# 2-1. sklearn.cluster.AgglomerativeClustering}}\label{sklearn.cluster.agglomerativeclustering}
+
+\begin{itemize}
+\tightlist
+\item
+  Parameter
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{n\_cluster} - 클러스터의 개수
+  \end{itemize}
+\item
+  Return : 모든 데이터의 Label
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} import packages}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{AgglomerativeClustering}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} parameter setting}
+         \PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} sklearn\PYZus{}hc\PYZus{}model}
+         \PY{n}{sklearn\PYZus{}hc\PYZus{}model} \PY{o}{=} \PY{n}{AgglomerativeClustering}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} fit to model}
+         \PY{n}{sklearn\PYZus{}hc\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} AgglomerativeClustering(affinity='euclidean', compute\_full\_tree='auto',
+                     connectivity=None, linkage='ward',
+                     memory=Memory(cachedir=None), n\_clusters=5,
+                     pooling\_func=<function mean at 0x7efbd40621e0>)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} get predicted labels}
+         \PY{n}{predicted\PYZus{}labels\PYZus{}sklearn} \PY{o}{=} \PY{n}{sklearn\PYZus{}hc\PYZus{}model}\PY{o}{.}\PY{n}{labels\PYZus{}}
+         \PY{c+c1}{\PYZsh{}sklearn\PYZus{}model.fit\PYZus{}predict(X\PYZus{}df)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} add result column to copied df}
+         \PY{n}{result\PYZus{}df} \PY{o}{=} \PY{n}{X\PYZus{}df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sklearn\PYZus{}labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{predicted\PYZus{}labels\PYZus{}sklearn}
+\end{Verbatim}
+
+
+    \subsection{\texorpdfstring{\#\#\#\# 2-2. Clustering with Dendrogram :
+\texttt{scipy.cluster.hierarchy}}{\#\#\#\# 2-2. Clustering with Dendrogram : scipy.cluster.hierarchy}}\label{clustering-with-dendrogram-scipy.cluster.hierarchy}
+
+\begin{itemize}
+\tightlist
+\item
+  Linkage Matrix
+\item
+  Dendromgram \& Set k
+\item
+  get predicted\_labels
+\end{itemize}
+
+    \subparagraph{\texorpdfstring{Linkage Matrix :
+\texttt{scipy.cluster.hierarchy.linkage}}{Linkage Matrix : scipy.cluster.hierarchy.linkage}}\label{linkage-matrix-scipy.cluster.hierarchy.linkage}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} import packages}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{cluster}\PY{n+nn}{.}\PY{n+nn}{hierarchy} \PY{k}{import} \PY{n}{linkage}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} Z = linkage(X, method)}
+         \PY{n}{Z} \PY{o}{=} \PY{n}{linkage}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{centroid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} What is Z, linkage?}
+         \PY{n}{Z}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} array([[ 1038.,  1039.,     0.,     2.],
+                [   64.,    65.,     0.,     2.],
+                [ 1070.,  1071.,     0.,     2.],
+                [ 1072.,  1073.,     0.,     2.],
+                [  268.,   269.,     0.,     2.],
+                [ 1096.,  1097.,     0.,     2.],
+                [  274.,   275.,     0.,     2.],
+                [ 1104.,  1105.,     0.,     2.],
+                [ 1108.,  1109.,     0.,     2.],
+                [ 1110.,  1111.,     0.,     2.]])
+\end{Verbatim}
+            
+    \subparagraph{\texorpdfstring{Dendrogram \& Set k :
+\texttt{scipy.cluster.hierarchy.dendrogram}}{Dendrogram \& Set k : scipy.cluster.hierarchy.dendrogram}}\label{dendrogram-set-k-scipy.cluster.hierarchy.dendrogram}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{cluster}\PY{n+nn}{.}\PY{n+nn}{hierarchy} \PY{k}{import} \PY{n}{dendrogram}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}dendrogram}\PY{p}{(}\PY{n}{title}\PY{p}{,} \PY{n}{xlabel}\PY{p}{,} \PY{n}{ylabel}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{n}{max\PYZus{}d}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Settings for figure}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hierarchical Clustering Dendrogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Index of Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Dendrogram}
+             \PY{k}{if} \PY{n}{p}\PY{p}{:}
+                 \PY{n}{dendrogram}\PY{p}{(}
+                     \PY{n}{Z}\PY{p}{,}
+                     \PY{n}{leaf\PYZus{}rotation}\PY{o}{=}\PY{l+m+mf}{90.}\PY{p}{,}  \PY{c+c1}{\PYZsh{} rotates the x axis labels}
+                     \PY{n}{leaf\PYZus{}font\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{8.}\PY{p}{,}  \PY{c+c1}{\PYZsh{} font size for the x axis labels}
+                     \PY{n}{truncate\PYZus{}mode} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lastp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{p}\PY{o}{=}\PY{n}{p}\PY{p}{,}
+                     \PY{n}{show\PYZus{}contracted} \PY{o}{=} \PY{k+kc}{True}
+                 \PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{dendrogram}\PY{p}{(}
+                     \PY{n}{Z}\PY{p}{,}
+                     \PY{n}{leaf\PYZus{}rotation}\PY{o}{=}\PY{l+m+mf}{90.}\PY{p}{,}  \PY{c+c1}{\PYZsh{} rotates the x axis labels}
+                     \PY{n}{leaf\PYZus{}font\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{8.}\PY{p}{,}  \PY{c+c1}{\PYZsh{} font size for the x axis labels}
+                 \PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{max\PYZus{}d}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{max\PYZus{}d}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} plot dendrogram}
+         \PY{n}{plot\PYZus{}dendrogram}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hierarhcical Clustering Dendrogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Index of Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                         \PY{n}{Z}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} Dendrogram에 표현할 가지의 개수 정하기 \PYZhy{} set p}
+         \PY{n}{plot\PYZus{}dendrogram}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hierarhcical Clustering Dendrogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Index of Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                         \PY{n}{Z}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} k를 결정하기 위해, k보다 큰 개수의 p를 가진 dendrogram을 그리고, max\PYZus{}distance를 결정한다.}
+         \PY{n}{plot\PYZus{}dendrogram}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hierarhcical Clustering Dendrogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Index of Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                         \PY{n}{Z}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{max\PYZus{}d} \PY{o}{=} \PY{l+m+mi}{45000}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} max\PYZus{}distance에 해당하는 선을 Dendrogram에 그려서 원하는 k를 표현하기 위한 max\PYZus{}distance를 확정한다.}
+         \PY{n}{plot\PYZus{}dendrogram}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hierarhcical Clustering Dendrogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Index of Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                         \PY{n}{Z}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{max\PYZus{}d}\PY{o}{=}\PY{n}{max\PYZus{}d}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subparagraph{\texorpdfstring{predicted\_labels :
+\texttt{scipy.cluster.hierarchy.fcluster}}{predicted\_labels : scipy.cluster.hierarchy.fcluster}}\label{predicted_labels-scipy.cluster.hierarchy.fcluster}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{} import packages}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{cluster}\PY{n+nn}{.}\PY{n+nn}{hierarchy} \PY{k}{import} \PY{n}{fcluster}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} predicted\PYZus{}labels}
+         \PY{n}{predicted\PYZus{}labels\PYZus{}scipy} \PY{o}{=} \PY{n}{fcluster}\PY{p}{(}\PY{n}{Z}\PY{p}{,} \PY{n}{max\PYZus{}d}\PY{p}{,} \PY{n}{criterion}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{} save to result\PYZus{}df}
+         \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scipy\PYZus{}labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{predicted\PYZus{}labels\PYZus{}scipy}
+\end{Verbatim}
+
+
+    \subsection{\#\#\# 3. K-Means}\label{k-means}
+
+\subsection{\texorpdfstring{\#\#\#\#\# 3-1.
+\texttt{sklearn.cluster.KMeans}}{\#\#\#\#\# 3-1. sklearn.cluster.KMeans}}\label{sklearn.cluster.kmeans}
+
+\begin{itemize}
+\tightlist
+\item
+  Parameter
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{n\_cluster} - 클러스터의 개수
+  \end{itemize}
+\item
+  Return : 모든 데이터의 Label
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{} set parameters}
+         \PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{c+c1}{\PYZsh{} kmeans\PYZus{}model}
+         \PY{n}{kmeans\PYZus{}model} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{kmeans\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} KMeans(algorithm='auto', copy\_x=True, init='k-means++', max\_iter=300,
+             n\_clusters=5, n\_init=10, n\_jobs=1, precompute\_distances='auto',
+             random\_state=None, tol=0.0001, verbose=0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{c+c1}{\PYZsh{} predicted\PYZus{}labels}
+         \PY{n}{predicted\PYZus{}labels\PYZus{}kmeans} \PY{o}{=} \PY{n}{kmeans\PYZus{}model}\PY{o}{.}\PY{n}{labels\PYZus{}}
+         \PY{c+c1}{\PYZsh{}kmeans\PYZus{}model.fit\PYZus{}predict(preprocessed\PYZus{}df)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{} cluster\PYZus{}centers\PYZus{}}
+         \PY{n}{kmeans\PYZus{}model}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} array([[  2.18965517e+00,   1.37931034e+00,   5.75287356e+00,
+                   1.28735632e+00,   3.04597701e+00,   3.38505747e+00,
+                   2.47126437e+00,   3.59770115e+00,   6.72413793e-01,
+                   1.41666667e+01,   3.01724138e+00,   1.07643678e+01,
+                   4.43715517e+03,   1.72931034e+01,   5.61556897e+02,
+                   1.93580220e+00,   3.11616011e+02,   1.28379323e+01,
+                   8.99428931e-01,   5.97473102e-02,   4.08237590e-02,
+                   1.84897866e-01,   1.02360854e-01,   4.20754962e-02,
+                   3.29272360e-02,   2.92560466e-02,   2.58376005e-02,
+                   3.09164905e-02,   1.49804609e-02,   5.36747950e-01,
+                   3.64026674e-01,   4.57616063e-01,   1.11614490e-01,
+                   6.67427725e-02,   4.51546925e-01,   7.42605453e-02,
+                   1.05989568e-01,   1.02050023e-01,   2.31715892e-02,
+                   3.13979723e-02,   3.15715771e-02,   1.10493097e-02,
+                   3.63974645e-02,   1.09367174e-01,   2.31978522e-02,
+                   0.00000000e+00,   2.47126437e-01,   1.49425287e-01,
+                   3.39080460e-01,   6.89655172e-02,   4.59770115e-02,
+                   0.00000000e+00,   1.14942529e-01,   0.00000000e+00,
+                   5.74712644e-03,   1.14942529e-01,   1.14942529e-02,
+                   1.12068966e-01,   5.63218391e-01,   0.00000000e+00,
+                   1.03448276e-01,   8.62068966e-03,   5.74712644e-02,
+                   1.72413793e-01,   8.04597701e-02,   1.14942529e-02,
+                   0.00000000e+00,   9.77011494e-02,   5.11494253e-01,
+                   1.45114943e+00,   5.97701149e-01,   7.41379310e-01,
+                   1.14942529e-02,   6.32183908e-01,   2.18390805e-01,
+                   3.44827586e-02,   1.14942529e-01,   1.49425287e-01,
+                   5.74712644e-03,   0.00000000e+00,   2.87356322e-02,
+                   0.00000000e+00,   1.83908046e-01,   8.96551724e-01,
+                   3.04597701e-01,   2.29885057e-01,   4.33680869e-17,
+                   0.00000000e+00,   4.48275862e-01,   4.82758621e-01,
+                   1.55172414e-01,   1.03448276e-01,   3.39080460e-01,
+                   2.01149425e-02,   4.02298851e-02,   1.60919540e-01,
+                   1.72413793e-02,   4.82758621e-01,   1.03448276e-01,
+                   0.00000000e+00,   0.00000000e+00,   4.02298851e-02,
+                   1.14942529e-02,   1.03448276e-01,   2.29885057e-02,
+                   1.72413793e-02,   1.72413793e-02,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00],
+                [  2.85714286e+00,   2.48412698e+00,   9.53174603e+00,
+                   1.89682540e+00,   3.24603175e+00,   3.97619048e+00,
+                   5.18253968e+00,   3.03968254e+00,   1.00793651e+00,
+                   1.67460317e+01,   3.99206349e+00,   1.81428571e+01,
+                   1.65266667e+04,   3.93650794e+01,   1.72942976e+03,
+                   3.02927382e+00,   4.80783398e+02,   1.04930971e+01,
+                   9.28503691e-01,   4.58905619e-02,   2.56057473e-02,
+                   1.56455793e-01,   1.78794376e-01,   2.04790230e-02,
+                   3.25489348e-02,   9.40085446e-03,   2.60289711e-02,
+                   4.69565340e-02,   1.89897092e-02,   5.10522663e-01,
+                   1.92598268e-01,   5.04340809e-01,   1.91944942e-01,
+                   1.11115980e-01,   4.45329236e-01,   9.54635232e-02,
+                   1.07178201e-01,   5.29048547e-02,   3.73972278e-02,
+                   6.59418966e-03,   2.90155517e-02,   4.66491768e-03,
+                   1.18315011e-02,   1.87503692e-01,   2.21171055e-02,
+                   0.00000000e+00,   2.30158730e-01,   2.14285714e-01,
+                   4.76190476e-01,   7.93650794e-02,   7.93650794e-03,
+                   0.00000000e+00,   1.58730159e-01,   0.00000000e+00,
+                   7.93650794e-03,   9.52380952e-02,   7.93650794e-03,
+                   2.38095238e-01,   7.30158730e-01,   0.00000000e+00,
+                   1.82539683e-01,   1.19047619e-02,   4.76190476e-02,
+                   2.85714286e-01,   1.58730159e-02,   1.58730159e-02,
+                   0.00000000e+00,   7.14285714e-02,   7.77777778e-01,
+                   2.14285714e+00,   8.73015873e-01,   5.47619048e-01,
+                   3.17460317e-02,   7.93650794e-01,   2.77777778e-01,
+                   3.81639165e-17,   5.55555556e-02,   1.66666667e-01,
+                   3.17460317e-02,   0.00000000e+00,   1.58730159e-02,
+                   0.00000000e+00,   3.65079365e-01,   1.27380952e+00,
+                   3.49206349e-01,   2.77777778e-01,   1.90819582e-17,
+                   0.00000000e+00,   6.34920635e-01,   3.33333333e-01,
+                   1.58730159e-01,   8.33333333e-02,   3.65079365e-01,
+                   2.77777778e-02,   1.58730159e-02,   5.55555556e-02,
+                   1.58730159e-02,   3.80952381e-01,   7.93650794e-02,
+                   0.00000000e+00,   0.00000000e+00,   2.38095238e-02,
+                   7.93650794e-03,   1.11111111e-01,   2.38095238e-02,
+                   2.38095238e-02,  -3.64291930e-17,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00],
+                [  2.45454545e+00,   2.00000000e+00,   9.72727273e+00,
+                   2.00000000e+00,   3.72727273e+00,   4.18181818e+00,
+                   7.27272727e+00,   2.63636364e+00,   9.09090909e-01,
+                   1.80000000e+01,   3.90909091e+00,   1.78181818e+01,
+                   4.11950000e+04,   4.40000000e+01,   4.64930455e+03,
+                   3.09524062e+00,   1.22195230e+03,   1.13047860e+01,
+                   9.73461709e-01,   1.45852698e-02,   1.19530211e-02,
+                   3.84633368e-01,   3.64994254e-02,   4.19804393e-03,
+                   5.30185632e-03,   2.38153430e-02,   4.55519613e-02,
+                   1.05454545e-02,   4.91270535e-03,   4.84541842e-01,
+                   1.69789602e-01,   6.17045709e-01,   3.64994254e-02,
+                   1.76665263e-01,   7.39270662e-01,   7.03344562e-02,
+                   1.71514437e-02,   1.80742569e-02,   2.92425800e-02,
+                   6.02407429e-03,   4.55519613e-02,   4.55802708e-03,
+                   2.61372736e-02,   3.64994254e-02,   7.15583919e-03,
+                   0.00000000e+00,   4.54545455e-01,   3.63636364e-01,
+                   2.72727273e-01,   1.81818182e-01,   1.38777878e-17,
+                   0.00000000e+00,   4.54545455e-01,   0.00000000e+00,
+                   3.46944695e-18,   1.81818182e-01,   9.09090909e-02,
+                   4.09090909e-01,   7.27272727e-01,   0.00000000e+00,
+                   9.09090909e-02,  -8.67361738e-18,   0.00000000e+00,
+                   0.00000000e+00,   9.09090909e-02,   3.46944695e-18,
+                   0.00000000e+00,   1.81818182e-01,   1.00000000e+00,
+                   2.27272727e+00,   9.09090909e-01,   8.18181818e-01,
+                   9.09090909e-02,   6.81818182e-01,   3.63636364e-01,
+                  -1.73472348e-18,   9.09090909e-02,   8.32667268e-17,
+                   3.46944695e-18,   0.00000000e+00,   3.46944695e-18,
+                   0.00000000e+00,   1.81818182e-01,   1.22727273e+00,
+                   4.54545455e-01,   2.72727273e-01,  -8.67361738e-19,
+                   0.00000000e+00,   6.36363636e-01,   5.55111512e-17,
+                   2.72727273e-01,   1.36363636e-01,   3.63636364e-01,
+                  -6.93889390e-18,   0.00000000e+00,   6.36363636e-01,
+                   9.09090909e-02,   1.11022302e-16,   9.09090909e-02,
+                   0.00000000e+00,   0.00000000e+00,   9.09090909e-02,
+                   3.46944695e-18,   1.81818182e-01,   6.93889390e-18,
+                  -1.73472348e-18,  -8.67361738e-18,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00],
+                [  2.44588745e+00,   2.16017316e+00,   8.73160173e+00,
+                   1.91341991e+00,   3.23809524e+00,   4.62770563e+00,
+                   4.22077922e+00,   3.14718615e+00,   1.03896104e+00,
+                   1.87965368e+01,   3.84415584e+00,   1.76017316e+01,
+                   1.02492511e+04,   3.38095238e+01,   1.24785264e+03,
+                   2.50499506e+00,   3.43264001e+02,   1.22990095e+01,
+                   9.10411134e-01,   5.77077983e-02,   3.18810677e-02,
+                   2.00645188e-01,   9.60322397e-02,   3.92090070e-02,
+                   3.52344832e-02,   1.99861727e-02,   2.57812266e-02,
+                   3.11281728e-02,   2.34140501e-02,   5.28283347e-01,
+                   2.95546580e-01,   5.10978272e-01,   1.05029564e-01,
+                   8.84455844e-02,   4.66964795e-01,   1.01655876e-01,
+                   8.78003922e-02,   9.19293089e-02,   3.42666598e-02,
+                   2.26668623e-02,   2.87798245e-02,   3.75998225e-03,
+                   2.73549565e-02,   1.03480105e-01,   3.13412374e-02,
+                   0.00000000e+00,   2.64069264e-01,   1.68831169e-01,
+                   4.71861472e-01,   1.03896104e-01,   4.32900433e-02,
+                   0.00000000e+00,   2.03463203e-01,   0.00000000e+00,
+                   2.16450216e-02,   1.99134199e-01,   1.73160173e-02,
+                   2.46753247e-01,   7.83549784e-01,   0.00000000e+00,
+                   1.77489177e-01,   1.94805195e-02,   3.46320346e-02,
+                   2.72727273e-01,   8.22510823e-02,   4.32900433e-03,
+                   0.00000000e+00,   1.08225108e-01,   7.74891775e-01,
+                   2.13203463e+00,   8.48484848e-01,   6.62337662e-01,
+                   2.16450216e-02,   7.90043290e-01,   3.29004329e-01,
+                   1.17961196e-16,   7.35930736e-02,   1.60173160e-01,
+                   8.65800866e-03,   0.00000000e+00,   4.32900433e-03,
+                   0.00000000e+00,   2.85714286e-01,   1.33766234e+00,
+                   4.02597403e-01,   3.03030303e-01,   8.65800866e-03,
+                   0.00000000e+00,   7.14285714e-01,   5.97402597e-01,
+                   2.07792208e-01,   5.84415584e-02,   5.23809524e-01,
+                   9.09090909e-02,   3.89610390e-02,   1.06060606e-01,
+                   3.03030303e-02,   5.97402597e-01,   1.38528139e-01,
+                   0.00000000e+00,   0.00000000e+00,   5.62770563e-02,
+                   8.65800866e-03,   1.38528139e-01,   1.29870130e-02,
+                   1.17961196e-16,   2.16450216e-02,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00],
+                [  2.87931034e+00,   2.67241379e+00,   1.00172414e+01,
+                   2.00000000e+00,   3.44827586e+00,   3.81034483e+00,
+                   6.50000000e+00,   3.01724138e+00,   1.12068966e+00,
+                   1.89137931e+01,   3.84482759e+00,   1.77586207e+01,
+                   2.54088793e+04,   4.18793103e+01,   2.54166379e+03,
+                   4.12778551e+00,   7.15434281e+02,   9.98945906e+00,
+                   9.18962799e-01,   4.19110197e-02,   3.91261808e-02,
+                   1.34957626e-01,   2.53182092e-01,   1.53152329e-02,
+                   4.03599939e-02,   7.56886803e-03,   2.27886081e-02,
+                   3.33863502e-02,   7.75489150e-03,   4.84686338e-01,
+                   1.66810889e-01,   4.80851081e-01,   2.62985850e-01,
+                   8.93521801e-02,   4.07186991e-01,   1.06693493e-01,
+                   9.87642406e-02,   3.84794784e-02,   2.59005349e-02,
+                   9.52876630e-03,   2.27886081e-02,   5.19358373e-03,
+                   9.17459214e-03,   2.57373361e-01,   1.89163518e-02,
+                   0.00000000e+00,   2.06896552e-01,   1.37931034e-01,
+                   4.13793103e-01,   6.89655172e-02,   5.17241379e-02,
+                   0.00000000e+00,   2.75862069e-01,   0.00000000e+00,
+                  -2.77555756e-17,   2.06896552e-01,   1.72413793e-02,
+                   2.84482759e-01,   8.27586207e-01,   0.00000000e+00,
+                   1.89655172e-01,   2.58620690e-02,   8.62068966e-02,
+                   3.62068966e-01,   8.62068966e-02,   3.44827586e-02,
+                   0.00000000e+00,   1.72413793e-01,   7.24137931e-01,
+                   2.15517241e+00,   8.96551724e-01,   6.72413793e-01,
+                   3.44827586e-02,   8.62068966e-01,   2.75862069e-01,
+                  -6.93889390e-18,   1.20689655e-01,   1.89655172e-01,
+                   1.72413793e-02,   0.00000000e+00,  -1.73472348e-17,
+                   0.00000000e+00,   3.44827586e-01,   1.37068966e+00,
+                   3.27586207e-01,   3.44827586e-01,   1.72413793e-02,
+                   0.00000000e+00,   6.89655172e-01,   4.65517241e-01,
+                   3.10344828e-01,   5.17241379e-02,   5.34482759e-01,
+                   1.20689655e-01,   8.62068966e-02,   6.03448276e-02,
+                   5.17241379e-02,   4.65517241e-01,   8.62068966e-02,
+                   0.00000000e+00,   0.00000000e+00,   1.55172414e-01,
+                   3.44827586e-02,   1.24900090e-16,   1.72413793e-02,
+                  -6.93889390e-18,   1.72413793e-02,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00,   0.00000000e+00,
+                   0.00000000e+00,   0.00000000e+00]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{} add result to result\PYZus{}df}
+         \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kmeans\PYZus{}labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{predicted\PYZus{}labels\PYZus{}kmeans}
+\end{Verbatim}
+
+
+    \subsection{\#\#\# 4. Analysis}\label{analysis}
+
+\subsection{\#\#\#\# 4-1. Choose k : Using Silhouette
+Plot}\label{choose-k-using-silhouette-plot}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{c+c1}{\PYZsh{} import packages}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{silhouette\PYZus{}score}\PY{p}{,} \PY{n}{silhouette\PYZus{}samples}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{cm} \PY{k}{as} \PY{n+nn}{cm}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{} silhouette\PYZus{}avg}
+         \PY{n}{silhoutette\PYZus{}avg} \PY{o}{=} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{,} \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kmeans\PYZus{}labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{c+c1}{\PYZsh{} silhouette\PYZus{}value of each data}
+         \PY{n}{sample\PYZus{}silhouette\PYZus{}values} \PY{o}{=} \PY{n}{silhouette\PYZus{}samples}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{,} \PY{n}{result\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kmeans\PYZus{}labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}silhouette}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+             \PY{n}{cluster\PYZus{}labels} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{)}
+             \PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cluster\PYZus{}labels}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} axis setting}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{X\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{n}{n\PYZus{}clusters} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{y\PYZus{}lower} \PY{o}{=} \PY{l+m+mi}{10}
+             
+             \PY{n}{silhouette\PYZus{}avg} \PY{o}{=} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{k : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{silhouette\PYZus{}avg : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{silhouette\PYZus{}avg}\PY{p}{)}\PY{p}{)}
+             \PY{n}{data\PYZus{}silhouette\PYZus{}values} \PY{o}{=} \PY{n}{silhouette\PYZus{}samples}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cluster\PYZus{}labels}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} 특정 클러스터의 silhouette 값만 추출}
+                 \PY{n}{ith\PYZus{}cluster\PYZus{}silhouette\PYZus{}values} \PY{o}{=} \PY{n}{data\PYZus{}silhouette\PYZus{}values}\PY{p}{[}\PY{n}{labels} \PY{o}{==} \PY{n}{i}\PY{p}{]}
+                 
+                 \PY{c+c1}{\PYZsh{} 내림차순으로 정렬}
+                 \PY{n}{ith\PYZus{}cluster\PYZus{}silhouette\PYZus{}values}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} 해당 클러스터의 크기}
+                 \PY{n}{size\PYZus{}cluster\PYZus{}i} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{ith\PYZus{}cluster\PYZus{}silhouette\PYZus{}values}\PY{p}{)}
+                
+                 \PY{c+c1}{\PYZsh{} 클러스터의 silhouette을 표시할 y축 최고값 결정}
+                 \PY{n}{y\PYZus{}upper} \PY{o}{=} \PY{n}{y\PYZus{}lower} \PY{o}{+} \PY{n}{size\PYZus{}cluster\PYZus{}i}
+         
+                 \PY{c+c1}{\PYZsh{} 색}
+                 \PY{n}{color} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{spectral}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{/} \PY{n}{n\PYZus{}clusters}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} plot silhouette}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{fill\PYZus{}betweenx}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{y\PYZus{}lower}\PY{p}{,} \PY{n}{y\PYZus{}upper}\PY{p}{)}\PY{p}{,}
+                                   \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ith\PYZus{}cluster\PYZus{}silhouette\PYZus{}values}\PY{p}{,}
+                                   \PY{n}{facecolor}\PY{o}{=}\PY{n}{color}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{n}{color}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} y축에 클러스터 이름 표시}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{y\PYZus{}lower} \PY{o}{+} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{size\PYZus{}cluster\PYZus{}i}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} 다음 클러스터의 silhouette을 표시할 최저점 조정}
+                 \PY{n}{y\PYZus{}lower} \PY{o}{=} \PY{n}{y\PYZus{}upper} \PY{o}{+} \PY{l+m+mi}{10}  \PY{c+c1}{\PYZsh{} 10 for the 0 samples}
+         
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The silhouette plot for k=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The silhouette coefficient values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} silhouette 평균 값을 나타내는 선}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{silhouette\PYZus{}avg}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} y축 값 제거}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{c+c1}{\PYZsh{} plot silhouette for choosing k}
+         \PY{n}{k\PYZus{}candidates} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{k\PYZus{}candidates}\PY{p}{:}
+             \PY{n}{ith\PYZus{}model} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{i}\PY{p}{)}
+             \PY{n}{labels} \PY{o}{=} \PY{n}{ith\PYZus{}model}\PY{o}{.}\PY{n}{fit\PYZus{}predict}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{)}
+             \PY{n}{plot\PYZus{}silhouette}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+k : 2
+silhouette\_avg : 0.6076315274300674
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+k : 3
+silhouette\_avg : 0.535543526103045
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+k : 4
+silhouette\_avg : 0.5206601603698584
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+k : 5
+silhouette\_avg : 0.5098596535908152
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{4-2. groupby()}\label{groupby}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{result\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scipy\PYZus{}labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \emph{Q. 지금까지 진행해온 분석의 문제점은?} - 범주형 변수를 수치형
+변수처럼 분석함 - 수치형 데이터가 동일한 범위를 갖지 않음 - 구매와
+관련된 변수만 선택되지 않았음
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{c+c1}{\PYZsh{} Hint 1}
+         \PY{n}{result\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sklearn\PYZus{}labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:}                      SEC       FEH         MT       SEX       AGE       EDU  \textbackslash{}
+         sklearn\_labels                                                                
+         0               2.795455  2.522727  10.159091  2.000000  3.500000  4.022727   
+         1               2.873786  2.582524   9.495146  1.912621  3.320388  3.844660   
+         2               2.290043  2.051948   8.311688  1.848485  3.194805  4.714286   
+         3               2.664430  2.201342   8.986577  1.892617  3.241611  4.241611   
+         4               2.123288  0.684932   3.054795  0.671233  2.890411  1.808219   
+         
+                               HS     CHILD        CS  Affluence Index  
+         sklearn\_labels                                                 
+         0               6.522727  3.068182  1.068182        18.363636  
+         1               5.543689  2.873786  1.019417        17.854369  
+         2               3.744589  3.168831  1.008658        19.307359  
+         3               4.778523  3.107383  1.006711        17.328859  
+         4               1.095890  4.301370  0.328767         7.164384  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{c+c1}{\PYZsh{} Hint 2 }
+         \PY{n}{X\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{:}\PY{l+m+mi}{46}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:}            Brand Runs  Total Volume  No. of  Trans   Value  \textbackslash{}
+         Member id                                                    
+         1010010.0        17.0        8025.0           24.0   818.0   
+         1010010.0        17.0        8025.0           24.0   818.0   
+         1010020.0        25.0       13975.0           40.0  1681.5   
+         1010020.0        25.0       13975.0           40.0  1681.5   
+         1014020.0        37.0       23100.0           63.0  1950.0   
+         1014020.0        37.0       23100.0           63.0  1950.0   
+         1014030.0         4.0        1500.0            4.0   114.0   
+         1014030.0         4.0        1500.0            4.0   114.0   
+         1014190.0         6.0        8300.0           13.0   591.0   
+         1014190.0         6.0        8300.0           13.0   591.0   
+         
+                    Trans / Brand Runs    Vol/Tran  Avg. Price   Pur Vol No Promo - \%  \textbackslash{}
+         Member id                                                                      
+         1010010.0            1.411765  334.375000    10.193146              1.000000   
+         1010010.0            1.411765  334.375000    10.193146              1.000000   
+         1010020.0            1.600000  349.375000    12.032200              0.887299   
+         1010020.0            1.600000  349.375000    12.032200              0.887299   
+         1014020.0            1.702703  366.666667     8.441558              0.941558   
+         1014020.0            1.702703  366.666667     8.441558              0.941558   
+         1014030.0            1.000000  375.000000     7.600000              1.000000   
+         1014030.0            1.000000  375.000000     7.600000              1.000000   
+         1014190.0            2.166667  638.461538     7.120482              0.614458   
+         1014190.0            2.166667  638.461538     7.120482              0.614458   
+         
+                    Pur Vol Promo 6 \%  Pur Vol Other Promo \%            {\ldots}             \textbackslash{}
+         Member id                                                      {\ldots}              
+         1010010.0           0.000000               0.000000            {\ldots}              
+         1010010.0           0.000000               0.000000            {\ldots}              
+         1010020.0           0.096601               0.016100            {\ldots}              
+         1010020.0           0.096601               0.016100            {\ldots}              
+         1014020.0           0.019481               0.038961            {\ldots}              
+         1014020.0           0.019481               0.038961            {\ldots}              
+         1014030.0           0.000000               0.000000            {\ldots}              
+         1014030.0           0.000000               0.000000            {\ldots}              
+         1014190.0           0.144578               0.240964            {\ldots}              
+         1014190.0           0.144578               0.240964            {\ldots}              
+         
+                    PropCat 7  PropCat 8  PropCat 9  PropCat 10  PropCat 11  \textbackslash{}
+         Member id                                                            
+         1010010.0   0.000000   0.000000   0.000000         0.0    0.000000   
+         1010010.0   0.000000   0.000000   0.000000         0.0    0.000000   
+         1010020.0   0.026834   0.016100   0.014311         0.0    0.059034   
+         1010020.0   0.026834   0.016100   0.014311         0.0    0.059034   
+         1014020.0   0.033550   0.010823   0.008658         0.0    0.000000   
+         1014020.0   0.033550   0.010823   0.008658         0.0    0.000000   
+         1014030.0   0.000000   0.000000   0.000000         0.0    0.000000   
+         1014030.0   0.000000   0.000000   0.000000         0.0    0.000000   
+         1014190.0   0.000000   0.048193   0.000000         0.0    0.000000   
+         1014190.0   0.000000   0.048193   0.000000         0.0    0.000000   
+         
+                    PropCat 12  PropCat 13  PropCat 14  PropCat 15  \textbackslash{}
+         Member id                                                   
+         1010010.0    0.028037         0.0    0.130841    0.339564   
+         1010010.0    0.028037         0.0    0.130841    0.339564   
+         1010020.0    0.000000         0.0    0.080501    0.000000   
+         1010020.0    0.000000         0.0    0.080501    0.000000   
+         1014020.0    0.016234         0.0    0.561688    0.003247   
+         1014020.0    0.016234         0.0    0.561688    0.003247   
+         1014030.0    0.000000         0.0    0.600000    0.000000   
+         1014030.0    0.000000         0.0    0.600000    0.000000   
+         1014190.0    0.000000         0.0    0.144578    0.000000   
+         1014190.0    0.000000         0.0    0.144578    0.000000   
+         
+                    Radio/Transistor with FM  
+         Member id                            
+         1010010.0                       0.0  
+         1010010.0                       0.0  
+         1010020.0                       0.0  
+         1010020.0                       0.0  
+         1014020.0                       0.0  
+         1014020.0                       0.0  
+         1014030.0                       0.0  
+         1014030.0                       0.0  
+         1014190.0                       0.0  
+         1014190.0                       0.0  
+         
+         [10 rows x 35 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{c+c1}{\PYZsh{} Hint 3 : 현재 변수의 개수}
+         \PY{n}{X\PYZus{}df}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}73}]:} Index(['SEC', 'FEH', 'MT', 'SEX', 'AGE', 'EDU', 'HS', 'CHILD', 'CS',
+                'Affluence Index',
+                {\ldots}
+                'Personal/Home Computers', 'Computer Printers', 'Fax Machine',
+                'Video camera/Handycam', 'Radio Clock', 'Deep Freezer',
+                'Electirc Kettle\textbackslash{}t\textbackslash{}t', 'Dish Washing Machine', 'Kitchen Sink',
+                'Floor Polisher'],
+               dtype='object', length=113)
+\end{Verbatim}
+            
+    \subsection{\#\#\# 5. 실습 : 비누 판매 마케팅 전략 수립을 위한 데이터
+분석}\label{uxc2e4uxc2b5-uxbe44uxb204-uxd310uxb9e4-uxb9c8uxcf00uxd305-uxc804uxb7b5-uxc218uxb9bduxc744-uxc704uxd55c-uxb370uxc774uxd130-uxbd84uxc11d}
+
+\subsection{\#\#\#\# 5-1. More Preprocessing}\label{more-preprocessing}
+
+\subparagraph{1. pd.get\_dummies}\label{pd.get_dummies}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}74}]:} ['SEC',
+          'FEH',
+          'MT',
+          'SEX',
+          'AGE',
+          'EDU',
+          'HS',
+          'CHILD',
+          'CS',
+          'Affluence Index',
+          'No. of Brands',
+          'Brand Runs',
+          'Total Volume',
+          'No. of  Trans',
+          'Value',
+          'Trans / Brand Runs',
+          'Vol/Tran',
+          'Avg. Price ',
+          'Pur Vol No Promo - \%',
+          'Pur Vol Promo 6 \%',
+          'Pur Vol Other Promo \%',
+          'Br. Cd. 57, 144',
+          'Br. Cd. 55',
+          'Br. Cd. 272',
+          'Br. Cd. 286',
+          'Br. Cd. 24',
+          'Br. Cd. 481',
+          'Br. Cd. 352',
+          'Br. Cd. 5',
+          'Others 999',
+          'Pr Cat 1',
+          'Pr Cat 2',
+          'Pr Cat 3',
+          'Pr Cat 4',
+          'PropCat 5',
+          'PropCat 6',
+          'PropCat 7',
+          'PropCat 8',
+          'PropCat 9',
+          'PropCat 10',
+          'PropCat 11',
+          'PropCat 12',
+          'PropCat 13',
+          'PropCat 14',
+          'PropCat 15',
+          'Radio/Transistor with FM',
+          'Radio/Transistor without FM',
+          'Stereo/Mono Tape Recorder',
+          'Two-in-one',
+          'Hi-Fi System/Music System without Compact disk',
+          'Hi-Fi System/Music System with Comapct disk',
+          'Walkman with FM',
+          'Walkman without FM',
+          'Discman with FM',
+          'Discman without FM',
+          'Video (VCP/VCR)',
+          'Laser Discs VCD/LD/DVD',
+          'TV - Black \& White',
+          'Colour TV with remote',
+          'Colour TV without remote',
+          'Bicycle',
+          'Moped',
+          'Motorcycle',
+          'Scooter',
+          'Cars/Jeeps/Vans',
+          'Auto Rickshaw',
+          'Tractors',
+          'Electric/Immersion Water heater',
+          'LPG/Bio-Gas stove',
+          'Mixer/Grinder',
+          'Pressure Cooker',
+          'Toaster',
+          'Cooking Range',
+          'Refrigerator - Non Frost free\textbackslash{}t\textbackslash{}t',
+          'Refrigerator - Frost free',
+          'Automatic dish washer',
+          'Oven - Electric',
+          'Electric Pressure Cooker',
+          'Microwave Oven',
+          'Oven-In Built Range',
+          'Oven Ordinary Box (Gas)',
+          'Rice Cooker',
+          'Electric Table Fan',
+          'Electric Ceiling Fan',
+          'Torch',
+          'Sewing Machine',
+          'Generator',
+          'Pump Set/Water Pump',
+          'Electric Irons',
+          'Geyser',
+          'Cameras (still)',
+          'Telephones (with NSD/STD/ISD)',
+          'Telephones (Local only)',
+          'Air Coolers\textbackslash{}t\textbackslash{}t',
+          'Vacuum cleaner',
+          'Air Conditioners',
+          'Water purifier (Aquaguard etc.)',
+          'Washing Machines (Rs.5000+) Semi Automatic',
+          'Washing Machines (Rs.5000+) Fully Automatic',
+          'Washing Machines (Rs.5000+) Front Loading',
+          'Washing Machines (Rs.5000+) Top Loading',
+          'Mobil/Cellular phone',
+          'Pager',
+          'Personal/Home Computers',
+          'Computer Printers',
+          'Fax Machine',
+          'Video camera/Handycam',
+          'Radio Clock',
+          'Deep Freezer',
+          'Electirc Kettle\textbackslash{}t\textbackslash{}t',
+          'Dish Washing Machine',
+          'Kitchen Sink',
+          'Floor Polisher']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{c+c1}{\PYZsh{} dummify needed cols =}
+         \PY{c+c1}{\PYZsh{} dummified\PYZus{}df}
+         \PY{n}{dummy\PYZus{}needed\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FEH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CHILD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{dummified\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{dummy\PYZus{}needed\PYZus{}cols}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{dummified\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}76}]:} ['SEC',
+          'AGE',
+          'EDU',
+          'HS',
+          'Affluence Index',
+          'No. of Brands',
+          'Brand Runs',
+          'Total Volume',
+          'No. of  Trans',
+          'Value',
+          'Trans / Brand Runs',
+          'Vol/Tran',
+          'Avg. Price ',
+          'Pur Vol No Promo - \%',
+          'Pur Vol Promo 6 \%',
+          'Pur Vol Other Promo \%',
+          'Br. Cd. 57, 144',
+          'Br. Cd. 55',
+          'Br. Cd. 272',
+          'Br. Cd. 286',
+          'Br. Cd. 24',
+          'Br. Cd. 481',
+          'Br. Cd. 352',
+          'Br. Cd. 5',
+          'Others 999',
+          'Pr Cat 1',
+          'Pr Cat 2',
+          'Pr Cat 3',
+          'Pr Cat 4',
+          'PropCat 5',
+          'PropCat 6',
+          'PropCat 7',
+          'PropCat 8',
+          'PropCat 9',
+          'PropCat 10',
+          'PropCat 11',
+          'PropCat 12',
+          'PropCat 13',
+          'PropCat 14',
+          'PropCat 15',
+          'Radio/Transistor with FM',
+          'Radio/Transistor without FM',
+          'Stereo/Mono Tape Recorder',
+          'Two-in-one',
+          'Hi-Fi System/Music System without Compact disk',
+          'Hi-Fi System/Music System with Comapct disk',
+          'Walkman with FM',
+          'Walkman without FM',
+          'Discman with FM',
+          'Discman without FM',
+          'Video (VCP/VCR)',
+          'Laser Discs VCD/LD/DVD',
+          'TV - Black \& White',
+          'Colour TV with remote',
+          'Colour TV without remote',
+          'Bicycle',
+          'Moped',
+          'Motorcycle',
+          'Scooter',
+          'Cars/Jeeps/Vans',
+          'Auto Rickshaw',
+          'Tractors',
+          'Electric/Immersion Water heater',
+          'LPG/Bio-Gas stove',
+          'Mixer/Grinder',
+          'Pressure Cooker',
+          'Toaster',
+          'Cooking Range',
+          'Refrigerator - Non Frost free\textbackslash{}t\textbackslash{}t',
+          'Refrigerator - Frost free',
+          'Automatic dish washer',
+          'Oven - Electric',
+          'Electric Pressure Cooker',
+          'Microwave Oven',
+          'Oven-In Built Range',
+          'Oven Ordinary Box (Gas)',
+          'Rice Cooker',
+          'Electric Table Fan',
+          'Electric Ceiling Fan',
+          'Torch',
+          'Sewing Machine',
+          'Generator',
+          'Pump Set/Water Pump',
+          'Electric Irons',
+          'Geyser',
+          'Cameras (still)',
+          'Telephones (with NSD/STD/ISD)',
+          'Telephones (Local only)',
+          'Air Coolers\textbackslash{}t\textbackslash{}t',
+          'Vacuum cleaner',
+          'Air Conditioners',
+          'Water purifier (Aquaguard etc.)',
+          'Washing Machines (Rs.5000+) Semi Automatic',
+          'Washing Machines (Rs.5000+) Fully Automatic',
+          'Washing Machines (Rs.5000+) Front Loading',
+          'Washing Machines (Rs.5000+) Top Loading',
+          'Mobil/Cellular phone',
+          'Pager',
+          'Personal/Home Computers',
+          'Computer Printers',
+          'Fax Machine',
+          'Video camera/Handycam',
+          'Radio Clock',
+          'Deep Freezer',
+          'Electirc Kettle\textbackslash{}t\textbackslash{}t',
+          'Dish Washing Machine',
+          'Kitchen Sink',
+          'Floor Polisher',
+          'FEH\_0.0',
+          'FEH\_1.0',
+          'FEH\_2.0',
+          'FEH\_3.0',
+          'MT\_0.0',
+          'MT\_3.0',
+          'MT\_4.0',
+          'MT\_5.0',
+          'MT\_6.0',
+          'MT\_8.0',
+          'MT\_9.0',
+          'MT\_10.0',
+          'MT\_12.0',
+          'MT\_13.0',
+          'MT\_14.0',
+          'MT\_15.0',
+          'MT\_16.0',
+          'MT\_17.0',
+          'MT\_19.0',
+          'SEX\_0.0',
+          'SEX\_1.0',
+          'SEX\_2.0',
+          'CHILD\_1.0',
+          'CHILD\_2.0',
+          'CHILD\_3.0',
+          'CHILD\_4.0',
+          'CHILD\_5.0',
+          'CS\_0.0',
+          'CS\_1.0',
+          'CS\_2.0']
+\end{Verbatim}
+            
+    \subparagraph{2. Scaling}\label{scaling}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{c+c1}{\PYZsh{} scale needed cols = }
+         \PY{c+c1}{\PYZsh{} scaled\PYZus{}df }
+         \PY{n}{scale\PYZus{}needed\PYZus{}cols} \PY{o}{=} \PY{n}{dummified\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{13}\PY{p}{]}
+         \PY{n}{scaled\PYZus{}df} \PY{o}{=} \PY{n}{dummified\PYZus{}df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{scaled\PYZus{}df}\PY{p}{[}\PY{n}{scale\PYZus{}needed\PYZus{}cols}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{[}\PY{n}{scale\PYZus{}needed\PYZus{}cols}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{X\PYZus{}df}\PY{p}{[}\PY{n}{scale\PYZus{}needed\PYZus{}cols}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{n}{X\PYZus{}df}\PY{p}{[}\PY{n}{scale\PYZus{}needed\PYZus{}cols}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{scaled\PYZus{}df}\PY{p}{[}\PY{n}{scale\PYZus{}needed\PYZus{}cols}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}78}]:}            Affluence Index  No. of Brands  Brand Runs  Total Volume  \textbackslash{}
+         Member id                                                             
+         1010010.0        -1.316929      -0.403196    0.120123     -0.500799   
+         1010010.0        -1.316929      -0.403196    0.120123     -0.500799   
+         1010020.0         0.173603       0.863388    0.889935      0.265250   
+         1010020.0         0.173603       0.863388    0.889935      0.265250   
+         1014020.0         0.524317       0.863388    2.044653      1.440072   
+         1014020.0         0.524317       0.863388    2.044653      1.440072   
+         1014030.0        -1.492286      -1.036488   -1.130822     -1.340877   
+         1014030.0        -1.492286      -1.036488   -1.130822     -1.340877   
+         1014190.0        -0.615502      -0.403196   -0.938369     -0.465393   
+         1014190.0        -0.615502      -0.403196   -0.938369     -0.465393   
+         1017020.0        -0.352467      -0.403196    0.986162      0.805990   
+         1017020.0        -0.352467      -0.403196    0.986162      0.805990   
+         1017110.0        -0.527824       0.230096    0.120123     -0.252959   
+         1017110.0        -0.527824       0.230096    0.120123     -0.252959   
+         1017160.0        -1.492286      -0.403196   -0.745916     -0.336645   
+         1017160.0        -1.492286      -0.403196   -0.745916     -0.336645   
+         1017360.0        -0.001754      -1.036488   -0.361010      1.876526   
+         1017360.0        -0.001754      -1.036488   -0.361010      1.876526   
+         1017460.0        -0.966216       0.230096   -0.264783     -0.574185   
+         1017460.0        -0.966216       0.230096   -0.264783     -0.574185   
+         1017490.0         1.138065       0.230096    0.793709      0.561369   
+         1017490.0         1.138065       0.230096    0.793709      0.561369   
+         1020070.0         0.085925       0.230096    0.505029      0.252375   
+         1020070.0         0.085925       0.230096    0.505029      0.252375   
+         1020210.0        -0.790859      -0.403196   -0.649689      1.127859   
+         1020210.0        -0.790859      -0.403196   -0.649689      1.127859   
+         1024050.0        -0.615502       0.230096   -0.553463      0.455152   
+         1024050.0        -0.615502       0.230096   -0.553463      0.455152   
+         1024100.0        -0.177110      -1.036488   -0.745916     -0.355958   
+         1024100.0        -0.177110      -1.036488   -0.745916     -0.355958   
+         {\ldots}                    {\ldots}            {\ldots}         {\ldots}           {\ldots}   
+         1165720.0         1.225744       1.496680    2.140880     -0.298021   
+         1165720.0         1.225744       1.496680    2.140880     -0.298021   
+         1166020.0         0.787352       0.230096    2.429560      1.309393   
+         1166020.0         0.787352       0.230096    2.429560      1.309393   
+         1166080.0         0.348960       1.496680    0.697482     -0.429987   
+         1166080.0         0.348960       1.496680    0.697482     -0.429987   
+         1166340.0         2.716276      -0.403196    0.120123     -0.808505   
+         1166340.0         2.716276      -0.403196    0.120123     -0.808505   
+         1166460.0         2.014849      -0.403196    1.755974      0.477683   
+         1166460.0         2.014849      -0.403196    1.755974      0.477683   
+         1166470.0         1.050387      -1.036488   -0.072330     -0.748638   
+         1166470.0         1.050387      -1.036488   -0.072330     -0.748638   
+         1166740.0         1.839492       0.230096   -0.264783     -0.642421   
+         1166740.0         1.839492       0.230096   -0.264783     -0.642421   
+         1166870.0        -0.352467      -0.403196   -0.938369     -0.471830   
+         1166870.0        -0.352467      -0.403196   -0.938369     -0.471830   
+         1166960.0         0.173603      -1.036488   -0.649689     -1.173505   
+         1166960.0         0.173603      -1.036488   -0.649689     -1.173505   
+         1166980.0         0.699673       0.230096   -0.264783     -0.851636   
+         1166980.0         0.699673       0.230096   -0.264783     -0.851636   
+         1167090.0        -0.177110      -0.403196   -1.034596     -0.372051   
+         1167090.0        -0.177110      -0.403196   -1.034596     -0.372051   
+         1167230.0         1.050387       0.863388    0.697482     -0.883823   
+         1167230.0         1.050387       0.863388    0.697482     -0.883823   
+         1167340.0        -0.352467       0.230096    0.312576      2.212558   
+         1167340.0        -0.352467       0.230096    0.312576      2.212558   
+         1167350.0         0.261282      -0.403196   -0.072330     -0.825886   
+         1167350.0         0.261282      -0.403196   -0.072330     -0.825886   
+         1167670.0        -0.177110      -0.403196   -0.649689      0.049597   
+         1167670.0        -0.177110      -0.403196   -0.649689      0.049597   
+         
+                    No. of  Trans     Value  Trans / Brand Runs  Vol/Tran  Avg. Price   
+         Member id                                                                      
+         1010010.0      -0.410639 -0.588348           -0.463184 -0.324446    -0.438742  
+         1010010.0      -0.410639 -0.588348           -0.463184 -0.324446    -0.438742  
+         1010020.0       0.507846  0.389804           -0.390886 -0.264122     0.052825  
+         1010020.0       0.507846  0.389804           -0.390886 -0.264122     0.052825  
+         1014020.0       1.828168  0.693954           -0.351440 -0.194582    -0.906929  
+         1014020.0       1.828168  0.693954           -0.351440 -0.194582    -0.906929  
+         1014030.0      -1.558746 -1.385823           -0.621335 -0.161068    -1.131872  
+         1014030.0      -1.558746 -1.385823           -0.621335 -0.161068    -1.131872  
+         1014190.0      -1.042098 -0.845489           -0.173240  0.898467    -1.260044  
+         1014190.0      -1.042098 -0.845489           -0.173240  0.898467    -1.260044  
+         1017020.0       0.565251  0.416990           -0.399749  0.113577    -0.655083  
+         1017020.0       0.565251  0.416990           -0.399749  0.113577    -0.655083  
+         1017110.0      -0.295829 -0.373687           -0.417998 -0.130133    -0.456789  
+         1017110.0      -0.295829 -0.373687           -0.417998 -0.130133    -0.456789  
+         1017160.0      -0.353234 -0.869843            0.194837 -0.173133    -1.526488  
+         1017160.0      -0.353234 -0.869843            0.194837 -0.173133    -1.526488  
+         1017360.0      -0.238423  2.011939           -0.141234  2.276465    -0.021672  
+         1017360.0      -0.238423  2.011939           -0.141234  2.276465    -0.021672  
+         1017460.0      -0.755071 -0.392945           -0.473611 -0.003556     0.388060  
+         1017460.0      -0.755071 -0.392945           -0.473611 -0.003556     0.388060  
+         1017490.0       0.622656  0.247074           -0.333274 -0.110799    -0.608618  
+         1017490.0       0.622656  0.247074           -0.333274 -0.110799    -0.608618  
+         1020070.0       1.713357  0.238295            0.110248 -0.754419    -0.181657  
+         1020070.0       1.713357  0.238295            0.110248 -0.754419    -0.181657  
+         1020210.0      -0.295829  0.227250            0.104151  1.528775    -1.174923  
+         1020210.0      -0.295829  0.227250            0.104151  1.528775    -1.174923  
+         1024050.0      -0.181018 -0.070103            0.070011  0.549892    -0.956618  
+         1024050.0      -0.181018 -0.070103            0.070011  0.549892    -0.956618  
+         1024100.0      -0.353234 -0.476204            0.194837 -0.197263    -0.484526  
+         1024100.0      -0.353234 -0.476204            0.194837 -0.197263    -0.484526  
+         {\ldots}                  {\ldots}       {\ldots}                 {\ldots}       {\ldots}          {\ldots}  
+         1165720.0       0.967088 -0.172620           -0.520261 -0.864848     0.136100  
+         1165720.0       0.967088 -0.172620           -0.520261 -0.864848     0.136100  
+         1166020.0       1.713357  1.442719           -0.433978 -0.213151    -0.003226  
+         1166020.0       1.713357  1.442719           -0.433978 -0.213151    -0.003226  
+         1166080.0       0.278224 -0.380484           -0.404245 -0.711245    -0.041503  
+         1166080.0       0.278224 -0.380484           -0.404245 -0.711245    -0.041503  
+         1166340.0      -0.525450 -0.641815           -0.508370 -0.639090     0.492948  
+         1166340.0      -0.525450 -0.641815           -0.508370 -0.639090     0.492948  
+         1166460.0       1.024494  0.611261           -0.451887 -0.386770     0.047639  
+         1166460.0       1.024494  0.611261           -0.451887 -0.386770     0.047639  
+         1166470.0       0.048603 -0.641589           -0.186043 -0.902550     0.215110  
+         1166470.0       0.048603 -0.641589           -0.186043 -0.902550     0.215110  
+         1166740.0      -1.042098 -0.449583           -0.621335  0.473106     0.466869  
+         1166740.0      -1.042098 -0.449583           -0.621335  0.473106     0.466869  
+         1166870.0      -0.812477 -0.025359            0.082813  0.282490     1.097191  
+         1166870.0      -0.812477 -0.025359            0.082813  0.282490     1.097191  
+         1166960.0      -1.099503 -1.196083           -0.493308 -0.730794    -0.476049  
+         1166960.0      -1.099503 -1.196083           -0.493308 -0.730794    -0.476049  
+         1166980.0      -0.181018 -0.748636           -0.178164 -0.907936     0.248470  
+         1166980.0      -0.181018 -0.748636           -0.178164 -0.907936     0.248470  
+         1167090.0      -0.525450 -0.135238            0.684540 -0.019399     0.444047  
+         1167090.0      -0.525450 -0.135238            0.684540 -0.019399     0.444047  
+         1167230.0      -0.181018 -0.550967           -0.537839 -0.943843     1.340987  
+         1167230.0      -0.181018 -0.550967           -0.537839 -0.943843     1.340987  
+         1167340.0      -0.353234  2.226317           -0.500046  3.011970    -0.129614  
+         1167340.0      -0.353234  2.226317           -0.500046  3.011970    -0.129614  
+         1167350.0      -0.697666 -0.993882           -0.518913 -0.505021    -0.927757  
+         1167350.0      -0.697666 -0.993882           -0.518913 -0.505021    -0.927757  
+         1167670.0      -0.984693  0.053936           -0.407956  1.864092    -0.153536  
+         1167670.0      -0.984693  0.053936           -0.407956  1.864092    -0.153536  
+         
+         [1200 rows x 9 columns]
+\end{Verbatim}
+            
+    \subsection{\#\#\#\# 5-2. 비누 구매 고객
+세분화}\label{uxbe44uxb204-uxad6cuxb9e4-uxace0uxac1d-uxc138uxbd84uxd654}
+
+\begin{itemize}
+\tightlist
+\item
+  구매 행동(구매량, 빈도, 할인에 대한 민감성, 브랜드 충성도), 구매
+  기반(가격, 구매제의) 등의 변수를 이용하여 군집화하라
+\item
+  어떤 군집화 방법을 선택할 것인가? 그 이유는 무엇인가?
+\item
+  k는 몇 개로 선택할 것인가? 한번에 진행 가능한 마케팅 전략이
+  2\textasciitilde{}5개라고 할 때 k의 개수는 타당한가?
+\end{itemize}
+
+    \subsection{\#\#\#\#\# 변수 선택}\label{uxbcc0uxc218-uxc120uxd0dd}
+
+구매행태에 관련있는 No. of Brands \textasciitilde{} PropCat 15까지를
+구매 패턴과 관련된 군집화의 변수로 사용한다.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{c+c1}{\PYZsh{} Select Features}
+         \PY{n}{selected\PYZus{}feautures} \PY{o}{=} \PY{n}{scaled\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{:}\PY{l+m+mi}{40}\PY{p}{]}
+         \PY{n}{selected\PYZus{}features\PYZus{}df} \PY{o}{=} \PY{n}{scaled\PYZus{}df}\PY{p}{[}\PY{n}{selected\PYZus{}feautures}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsection{\#\#\#\#\# 방법 선정}\label{uxbc29uxbc95-uxc120uxc815}
+
+AgglomerativeClustering을 사용한다. Dendrogram을 통해 클러스터의 거리
+차를 토대로 k를 선정할 수 있으며, 현실적인 상황에서 k를 조절하기도 쉬운
+방법이다.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{c+c1}{\PYZsh{} Choose Methods}
+         \PY{n}{Z} \PY{o}{=} \PY{n}{linkage}\PY{p}{(}\PY{n}{selected\PYZus{}features\PYZus{}df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ward}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot\PYZus{}dendrogram}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bath Soap Member Clustering}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}
+                         \PY{p}{,} \PY{n}{Z}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{\#\#\#\#\# k 선정}\label{k-uxc120uxc815}
+
+Dendrogram 상으로 보았을 때 4개의 k를 선정하는 것이 가장 타당한 것으로
+보인다. 수립할 수 있는 마케팅 전략의 개수와 유사하며, 클러스터간의 거리
+차가 다른 경우에 비해 뚜렷하게 구분된다.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{plot\PYZus{}dendrogram}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bath Soap Member Clustering}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance}\PY{l+s+s1}{\PYZsq{}}
+                         \PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}d}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_70_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{predicted\PYZus{}labels\PYZus{}bath\PYZus{}soap} \PY{o}{=} \PY{n}{fcluster}\PY{p}{(}\PY{n}{Z}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{n}{criterion}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{scaled\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted\PYZus{}labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{predicted\PYZus{}labels\PYZus{}bath\PYZus{}soap} 
+\end{Verbatim}
+
+
+    \subsection{\#\#\#\# 5-3. 타겟 클러스터 선정 및 마케팅
+기획}\label{uxd0c0uxac9f-uxd074uxb7ecuxc2a4uxd130-uxc120uxc815-uxbc0f-uxb9c8uxcf00uxd305-uxae30uxd68d}
+
+\begin{itemize}
+\tightlist
+\item
+  분석된 세분화에서 두 개의 클러스터를 선정하고, 그 집단의 특성에 대해
+  분석하시오.
+\item
+  선정한 두 클러스터에 대한 마케팅 전략을 수립하시오.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{c+c1}{\PYZsh{} Analysis}
+         \PY{n}{scaled\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted\PYZus{}labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{:}\PY{l+m+mi}{30}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}89}]:}                   Trans / Brand Runs  Vol/Tran  Avg. Price   \textbackslash{}
+         predicted\_labels                                              
+         1                           1.873298  0.705316    -1.210354   
+         2                          -0.213252 -0.181074     0.121810   
+         3                          -0.268974 -0.625665     0.454016   
+         4                          -0.048248  1.156207    -0.372638   
+         
+                           Pur Vol No Promo - \%  Pur Vol Promo 6 \%  \textbackslash{}
+         predicted\_labels                                            
+         1                             0.939627           0.012676   
+         2                             0.913021           0.054957   
+         3                             0.894436           0.070837   
+         4                             0.926522           0.046142   
+         
+                           Pur Vol Other Promo \%  Br. Cd. 57, 144  Br. Cd. 55  \textbackslash{}
+         predicted\_labels                                                       
+         1                              0.047696         0.054981    0.687601   
+         2                              0.032022         0.225177    0.069598   
+         3                              0.034727         0.159560    0.042283   
+         4                              0.027336         0.171053    0.114006   
+         
+                           Br. Cd. 272  Br. Cd. 286  Br. Cd. 24  Br. Cd. 481  \textbackslash{}
+         predicted\_labels                                                      
+         1                    0.001045     0.022725    0.002217     0.004299   
+         2                    0.037982     0.031467    0.016724     0.026999   
+         3                    0.046058     0.036701    0.037168     0.025026   
+         4                    0.016767     0.044428    0.009333     0.037418   
+         
+                           Br. Cd. 352  Br. Cd. 5  Others 999  Pr Cat 1  Pr Cat 2  \textbackslash{}
+         predicted\_labels                                                           
+         1                    0.065702   0.010205    0.151224  0.062348  0.206420   
+         2                    0.032821   0.016118    0.542968  0.297588  0.526744   
+         3                    0.031065   0.029765    0.592373  0.395867  0.495882   
+         4                    0.024267   0.010992    0.571736  0.165039  0.559837   
+         
+                           Pr Cat 3  Pr Cat 4  PropCat 5  
+         predicted\_labels                                 
+         1                 0.704390  0.026843   0.120213  
+         2                 0.080146  0.095522   0.509121  
+         3                 0.046076  0.062175   0.424043  
+         4                 0.127171  0.147953   0.554594  
+\end{Verbatim}
+            
+    3번째 클러스터의 경우, 전반적으로 사회 상위 계층이 묶여있는 것을 알 수
+있다. SEC가 약 2.1로 높고, 고학력이며(EDU가 5.11), 다양한 내구재를
+보유하고 있다(Affluence Index 0.487). 이들은 평균적으로 구매하는 비누의
+브랜드 개수가 많으나, 전체 구입량은 적다. 그렇지만 비싼 비누를 구매하는
+그룹(Avg. Price 0.45)이다.
+
+이들은 판촉에 의해서도 구매를 어느 정도 하는 그룹이기 때문에(Pur Vol No
+Promo - \% 다른 그룹과 별 차이 없음), 마케팅의 효과를 볼 수 있는
+그룹이다. 이 그룹을 떠올릴 수 있는 가상의 페르소나를 만들고 그
+페르소나가 비싼 비누를 사용하는 광고를 촬영하여 구매 욕구를 자극한다면
+이 그룹의 판매 욕구를 증진시킬 수 있을 것이다. 특히 여태까지 특별히 눈에
+띄는 판촉에 읳
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
